@@ -1,6 +1,5 @@
-# Weather-Dashboard
-https://sandy-06.github.io/Weather-Dashboard/   
-https://github.com/sandy-06/Weather-Dashboard/
+# Weather-Dashboard 
+https://github.com/ErikaRoguie/weather-tracker/
 
 
 User story
