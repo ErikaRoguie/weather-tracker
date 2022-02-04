@@ -3,32 +3,7 @@ var cityTextArea = document.getElementById("city");
 
 var searchCityBtn = document.getElementsByClassName("cityButton");
 
-var axios = require("axios").default;
 
-var options = {
-    method: 'GET',
-    url: 'https://community-open-weather-map.p.rapidapi.com/weather',
-    params: {
-        q: 'London,uk',
-        lat: '0',
-        lon: '0',
-        callback: 'test',
-        id: '2172797',
-        lang: 'null',
-        units: 'imperial',
-        mode: 'xml'
-    },
-    headers: {
-        'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com',
-        'x-rapidapi-key': '6e912ffa14msh6d130523bb9bb10p1efc1ejsn9db1f47c9b22'
-    }
-};
-
-axios.request(options).then(function (response) {
-    console.log(response.data);
-}).catch(function (error) {
-    console.error(error);
-});
 //get city
 searchCityBtn[0].addEventListener("click", function () {
 
@@ -38,38 +13,14 @@ searchCityBtn[0].addEventListener("click", function () {
     var priorCity = document.createElement("button")
     priorCity.textContent = "city";
 
-    fetch(`${requestURL}${city}&appid=${apiKey}`).then(function (res) {
+    fetch("https://api.openweathermap.org/data/2.5/forecast?q="+city+"&APPID=0c121cc91d6ba08b39c91b4fcc96b61d").then(function (res) {
         return res.json()
     }).then(function (res) {
         console.log(res)
-        var lat = res.city.coord.lat;
-        var lon = res.city.coord.lon;
-
-
 
         //city date ,temp wind humidity uv index with color 
 
-        var multiDay = var axios = require("axios").default;
-
-        var options = {
-            method: 'GET',
-            url: 'https://community-open-weather-map.p.rapidapi.com/weather',
-            "port": null,
-            "path": "/weather?q=London%2Cuk&lat=0&lon=0&callback=test&id=2172797&lang=null&units=imperial&mode=xml",
-            "headers": {
-                "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
-                "x-rapidapi-key": "6e912ffa14msh6d130523bb9bb10p1efc1ejsn9db1f47c9b22",
-                "useQueryString": true
-            }
-        };
-
-        axios.request(options).then(function (response) {
-            console.log(response.data);
-        }).catch(function (error) {
-            console.error(error);
-        });
-
-        fetch(multiDay).then(function (res) {
+        fetch("https://api.openweathermap.org/data/2.5/onecall?lat="+res.city.coord.lat+"&lon="+res.city.coord.lat+"&APPID=0c121cc91d6ba08b39c91b4fcc96b61d").then(function (res) {
             return res.json()
 
         }).then(function (data) {
@@ -101,7 +52,6 @@ searchCityBtn[0].addEventListener("click", function () {
 
             for (let i = 1; i < 6; i++) {
                 var pCity = document.getElementById("city" + i)
-
                 var newDate = document.getElementById("date" + i)
                 var fiveDayDate = moment(data.daily[i].dt * 1000).format("MM/DD/YY")
                 console.log(fiveDayDate)
@@ -110,19 +60,15 @@ searchCityBtn[0].addEventListener("click", function () {
                 console.log(newHumidity)
                 newDate.textContent = fiveDayDate
                 var newIcons = document.getElementById("icon" + i)
-                var iconUrl = "http://community-open-weather-map.p.rapidapi.com/img/wn/" + data.daily[i].weather[0].icon + "@2x.png";
+                var iconUrl = "https://openweathermap.org/img/w/" + data.daily[i].weather[0].icon + ".png";
                 var icon = document.createElement('img');
                 icon.src = iconUrl;
                 document.getElementById("icon" + i).appendChild(icon);
-
                 var pWind = document.getElementById("wind" + i)
                 pWind.textContent = `Wind:${newWind}mph`;
 
                 var pHumidity = document.getElementById("Humidity" + i)
                 pHumidity.textContent = "Humidity:" + newHumidity + "%";
-
-
-
             }
         });
     })
