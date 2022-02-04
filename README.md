@@ -1,6 +1,6 @@
 # Weather-Tracker 
-https://github.com/ErikaRoguie/weather-tracker/
-https://erikaroguie.github.io/weather-tracker/
+https://github.com/ErikaRoguie/weather-tracker/;
+https://erikaroguie.github.io/weather-tracker/;
 
 User story
 AS A traveler
